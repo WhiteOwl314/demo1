@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = "phoneNumber")
+@ToString
 public class Person {
 
     @Id
@@ -26,6 +26,8 @@ public class Person {
     private LocalDate birthday;
     private String bloodType;
     private String job;
+
+    @ToString.Exclude
     private String phoneNumber;
 
 }
