@@ -8,13 +8,10 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@Data
 public class Person {
 
     @Id
