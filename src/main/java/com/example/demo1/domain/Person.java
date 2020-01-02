@@ -11,15 +11,19 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Person {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    @NonNull
     private String name;
+
+    @NonNull
     private int age;
     private String hobby;
     private String address;
@@ -30,4 +34,23 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
+    public boolean equals(Object object){
+        if(object == null){
+            return false;
+        }
+
+        //다운캐스팅
+        Person person = (Person) object;
+
+        if(!person.getName().equals(this.getName())){
+            return false;
+        }
+
+        if(person.getAge() != this.getAge()){
+            return false;
+        }
+
+        return true;
+
+    }
 }

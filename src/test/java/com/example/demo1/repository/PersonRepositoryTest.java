@@ -34,5 +34,13 @@ class PersonRepositoryTest {
         assertThat(people.get(0).getAge()).isEqualTo(10);
     }
 
+    //HashCode, Equals Test
+    @Test
+    void hashCodeAndEquals(){
+        Person person1 = new Person("martin", 10);
+        Person person2 = new Person("martin", 10);
 
+        //hashCode 를 override 안해주면 false가 나옴
+        System.out.println(person1.equals(person2));
+    }
 }
