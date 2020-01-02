@@ -53,4 +53,9 @@ public class Person {
         return true;
 
     }
+
+    @Override
+    public int hashCode() {
+        return  (name + age).hashCode();
+    }
 }
