@@ -1,9 +1,6 @@
 package com.example.demo1.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
     @Id
