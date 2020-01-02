@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
@@ -32,15 +33,6 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
-
-    //차단할 수 있는 기능
-    //isBlock 자동으로 만들어줌
-    // 너무 많은 기능들 -> 도메인으로 넘길 예정
-    private boolean block;
-
-    private String blockReason;
-
-    private LocalDate blockStartDate;
-
-    private LocalDate blockEndDate;
+    @OneToOne
+    private Block block;
 }

@@ -33,6 +33,12 @@ class PersonServiceTest {
         result.forEach(System.out::println); //?
     }
 
+    private void givenBlockPerson(String name , int age){
+        Person blockPerson = new Person(name, age);
+        blockPerson.setBlock(new Block(name));
+        personRepository.save(blockPerson);
+    }
+
     private void givenBlocks() {
         givenBlock("martin");
     }
@@ -45,7 +51,7 @@ class PersonServiceTest {
         givenPerson("martin",10);
         givenPerson("david", 9);
         givenPerson("dannis", 7);
-        givenPerson("martin",11);
+        givenBlockPerson("martin",11);
     }
 
     private void givenPerson(String name, int age) {
