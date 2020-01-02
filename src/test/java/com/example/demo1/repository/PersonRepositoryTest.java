@@ -40,7 +40,11 @@ class PersonRepositoryTest {
         Person person1 = new Person("martin", 10);
         Person person2 = new Person("martin", 10);
 
-        //hashCode 를 override 안해주면 false가 나옴
+        //equals 를 override 안해주면 false가 나옴
         System.out.println(person1.equals(person2));
+
+        //hasgcode 는 다른 값을 가
+        System.out.println(person1.hashCode());
+        System.out.println(person2.hashCode());짐
     }
 }
