@@ -56,6 +56,6 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return  (name + age).hashCode();
+        return  (name + age).hashCode(); //name + age 는 임의로 설정해준 것
     }
 }
