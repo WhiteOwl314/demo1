@@ -47,10 +47,16 @@ class PersonServiceTest {
         personRepository.save(person);
         personRepository.findAll().forEach(System.out::println);
 
-        personRepository.delete(person);
+//        personRepository.delete(person);
+//        personRepository.findAll().forEach(System.out::println);
+//        blockRepository.findAll().forEach(System.out::println);
+        // martin은 삭제가 되었는데 아직 block쪽에는 martin이 남아있음. -> cascadeType.REMOVE 추가
+
+        person.setBlock(null);
+        personRepository.save(person);
         personRepository.findAll().forEach(System.out::println);
         blockRepository.findAll().forEach(System.out::println);
-        // martin은 삭제가 되었는데 아직 block쪽에는 martin이 남아있음. -> cascadeType.REMOVE 추가
+        // martin은 block이 해제되었지만 blockRepository에는 아직 martin이 남아있음. -> orphanRemoval = true
     }
 
     private void givenBlockPerson(String name , int age){
