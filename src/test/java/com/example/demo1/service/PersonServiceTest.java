@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 //보통 서비스의 테스트는 Mock테스트를 주로 사용함
@@ -24,13 +25,27 @@ class PersonServiceTest {
     @Test
     void getPeopleExcludeBlocks(){
         //현재 데이터베이스에 아무 값이 없기 때문에
-        givenPeaple();
-        givenBlocks();
+        givenPeople();
 
         List<Person> result = personService.getPeopleExcludeBlocks();
 
-//        System.out.println(result);
         result.forEach(System.out::println); //?
+    }
+
+    @Test
+    void cascadeTest(){
+        givenPeople();
+
+        List<Person> result = personRepository.findAll();
+
+        result.forEach(System.out::println);
+
+        Person person = result.get(3);
+        person.getBlock().setStartDate(LocalDate.now());
+        person.getBlock().setEndDate(LocalDate.now());
+
+        personRepository.save(person);
+        personRepository.findAll().forEach(System.out::println);
     }
 
     private void givenBlockPerson(String name , int age){
@@ -39,15 +54,7 @@ class PersonServiceTest {
         personRepository.save(blockPerson);
     }
 
-    private void givenBlocks() {
-        givenBlock("martin");
-    }
-
-    private Block givenBlock(String name) {
-        return blockRepository.save(new Block(name));
-    }
-
-    private void givenPeaple() {
+    private void givenPeople() {
         givenPerson("martin",10);
         givenPerson("david", 9);
         givenPerson("dannis", 7);
