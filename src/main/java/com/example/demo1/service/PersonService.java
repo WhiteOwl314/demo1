@@ -4,6 +4,7 @@ import com.example.demo1.domain.Block;
 import com.example.demo1.domain.Person;
 import com.example.demo1.repository.BlockRepository;
 import com.example.demo1.repository.PersonRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class PersonService {
     @Autowired
     private PersonRepository personRepository;
@@ -22,5 +24,16 @@ public class PersonService {
         List<Person> people = personRepository.findAll();
 
         return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());
+    }
+
+    public Person getPerson(Long id){
+        Person person = personRepository.findById(id).get();
+
+        //배포시 모든 로그 다 출력됨
+        System.out.println("person : " + person);
+        //배포시 로그 출력 제한 가능
+        log.info("person : {}", person);
+
+        return person;
     }
 }
