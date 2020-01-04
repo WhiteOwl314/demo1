@@ -30,7 +30,7 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, optional = true)
     @ToString.Exclude
     private Block block;
 }
