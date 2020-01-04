@@ -59,6 +59,14 @@ class PersonServiceTest {
         // martin은 block이 해제되었지만 blockRepository에는 아직 martin이 남아있음. -> orphanRemoval = true
     }
 
+    @Test
+    void getPerson(){
+        givenPeople();
+
+        Person person = personService.getPerson((long) 3);
+        System.out.println(person);
+    }
+
     private void givenBlockPerson(String name , int age){
         Person blockPerson = new Person(name, age);
         blockPerson.setBlock(new Block(name));
