@@ -4,6 +4,7 @@ import com.example.demo1.domain.dto.Birthday;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Entity
@@ -26,6 +27,7 @@ public class Person {
     private String hobby;
     private String address;
 
+    @Valid
     @Embedded
     private Birthday birthday;
 

@@ -46,7 +46,7 @@ class PersonRepositoryTest {
         givenPerson("benny",6, LocalDate.of(1995,8,30));
 
         //8월 1일부터 8월 31일까지 두 인자 포함
-        List<Person> result = personRepository.findByMonthOfBirthday(13);
+        List<Person> result = personRepository.findByMonthOfBirthday(8);
 
         result.forEach(System.out::println);
     }
@@ -57,7 +57,7 @@ class PersonRepositoryTest {
 
     private void givenPerson(String name, int age, LocalDate birthday) {
         Person person = new Person(name, age);
-        person.setBirthday(new Birthday(birthday.getYear(),13,birthday.getDayOfMonth()));
+        person.setBirthday(new Birthday(birthday));
         //getMonth 와 getMonthValue 차이는 뭐지?
 
         personRepository.save(person);
