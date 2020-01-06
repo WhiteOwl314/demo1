@@ -20,6 +20,12 @@ public class PersonService {
     @Autowired
     private BlockRepository blockRepository;
 
+    public List<Person> getPeopleByName(String name) {
+        List<Person> people = personRepository.findAll();
+
+        return people.stream().filter(person -> person.getName().equals(name)).collect(Collectors.toList());
+    }
+
     //차단된 사람 외에 전체 사람을 가져오는 로직
     public List<Person> getPeopleExcludeBlocks(){
         List<Person> people = personRepository.findAll();
