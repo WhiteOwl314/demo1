@@ -11,5 +11,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     List<Person> findByBlockIsNull();
 
-    Person findByBloodType(String bloodType);
+    List<Person> findByBloodType(String bloodType);
 }
