@@ -17,6 +17,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     //Entity 기반으로 쿼리 실행
     //?1 은 첫번째 인자를 뜻함
-    @Query(value = "select person from Person person where person.birthday.monthOfBirthday = ?1")
-    List<Person> findByMonthOfBirthday(int monthOfBirthday);
+    @Query(value = "select person from Person person where person.birthday.monthOfBirthday = ?1 and person.birthday.dayOfBirthday = ?2")
+    List<Person> findByMonthOfBirthday(int monthOfBirthday, int dayOfBirthday);
 }
