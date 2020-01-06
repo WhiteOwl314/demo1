@@ -46,7 +46,7 @@ class PersonRepositoryTest {
         givenPerson("benny",6, LocalDate.of(1995,8,30));
 
         //8월 1일부터 8월 31일까지 두 인자 포함
-        List<Person> result = personRepository.findByBirthdayBetween(LocalDate.of(1991,8,1),LocalDate.of(1991,8,31));
+        List<Person> result = personRepository.findByMonthOfBirthday(8);
 
         result.forEach(System.out::println);
     }
