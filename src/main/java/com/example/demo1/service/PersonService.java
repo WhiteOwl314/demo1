@@ -25,9 +25,7 @@ public class PersonService {
 
     //차단된 사람 외에 전체 사람을 가져오는 로직
     public List<Person> getPeopleExcludeBlocks(){
-        List<Person> people = personRepository.findAll();
-
-        return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());
+        return personRepository.findByBlockIsNull();
     }
 
     @Transactional(readOnly = true)
