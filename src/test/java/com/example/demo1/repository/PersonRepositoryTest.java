@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +32,33 @@ class PersonRepositoryTest {
 
         List<Person> people = personRepository.findAll();
 
-        assertThat(people.size()).isEqualTo(1);
         assertThat(people.get(0).getName()).isEqualTo("martin");
         assertThat(people.get(0).getAge()).isEqualTo(10);
+    }
+
+    @Test
+    void findByBirthdayBetween(){
+        givenPerson("martin",10, LocalDate.of(1991,8,15));
+        givenPerson("david",9, LocalDate.of(1992, 7, 10));
+        givenPerson("dennis",8, LocalDate.of(1993,1,5));
+        givenPerson("sophia",7, LocalDate.of(1994,6,30));
+        givenPerson("benny",6, LocalDate.of(1995,8,30));
+
+        //8월 1일부터 8월 31일까지 두 인자 포함
+        List<Person> result = personRepository.findByBirthdayBetween(LocalDate.of(1991,8,1),LocalDate.of(1991,8,31));
+
+        result.forEach(System.out::println);
+    }
+
+    private void givenPerson(String name, int age){
+        givenPerson(name, age, null);
+    }
+
+    private void givenPerson(String name, int age, LocalDate birthday) {
+        Person person = new Person(name, age);
+        person.setBirthday(birthday);
+
+        personRepository.save(person);
     }
 
     //HashCode, Equals Test
