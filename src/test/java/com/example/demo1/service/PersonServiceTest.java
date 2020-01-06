@@ -76,6 +76,15 @@ class PersonServiceTest {
         System.out.println(person);
     }
 
+    @Test
+    void findByBloodType(){
+
+        givenPerson("martin", 10);
+        givenPerson("david",9);
+
+
+    }
+
     private void givenBlockPerson(String name , int age){
         Person blockPerson = new Person(name, age);
         blockPerson.setBlock(new Block(name));
