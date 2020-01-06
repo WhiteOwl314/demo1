@@ -18,6 +18,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     //Entity 기반으로 쿼리 실행
     //?1 은 첫번째 인자를 뜻함, 인자의 순서대로 검색
-    @Query(value = "select * from person where month_of_birthday = :monthOfBirthday and day_of_birthday = :dayOfBirthday", nativeQuery = true)
-    List<Person> findByMonthOfBirthday(@Param("monthOfBirthday") int monthOfBirthday, @Param("dayOfBirthday") int dayOfBirthday);
+    @Query(value = "select person from Person person where person.birthday.monthOfBirthday = :monthOfBirthday")
+    List<Person> findByMonthOfBirthday(@Param("monthOfBirthday") int monthOfBirthday );
 }
