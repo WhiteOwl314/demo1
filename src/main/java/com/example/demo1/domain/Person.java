@@ -1,5 +1,6 @@
 package com.example.demo1.domain;
 
+import com.example.demo1.domain.dto.Birthday;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,9 +22,13 @@ public class Person {
 
     @NonNull
     private int age;
+
     private String hobby;
     private String address;
-    private LocalDate birthday;
+
+    @Embedded
+    private Birthday birthday;
+
     private String bloodType;
     private String job;
 

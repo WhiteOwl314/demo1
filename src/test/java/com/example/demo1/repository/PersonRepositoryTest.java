@@ -1,6 +1,7 @@
 package com.example.demo1.repository;
 
 import com.example.demo1.domain.Person;
+import com.example.demo1.domain.dto.Birthday;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -56,7 +57,8 @@ class PersonRepositoryTest {
 
     private void givenPerson(String name, int age, LocalDate birthday) {
         Person person = new Person(name, age);
-        person.setBirthday(birthday);
+        person.setBirthday(new Birthday(birthday.getYear(),birthday.getMonthValue(),birthday.getDayOfMonth()));
+        //getMonth 와 getMonthValue 차이는 뭐지?
 
         personRepository.save(person);
     }
