@@ -1,1 +1,1 @@
-INSERT INTO person('id', 'name', 'age', 'blood-type') VALUES (1,'martin', 10,  'A');
+INSERT INTO person(`id`, `name`, `age`) VALUES (1,'martin', 10 );

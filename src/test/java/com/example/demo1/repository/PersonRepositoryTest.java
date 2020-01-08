@@ -24,16 +24,16 @@ class PersonRepositoryTest {
     public void crud(){
         Person person = new Person();
 
-        person.setName("martin");
+        person.setName("john");
         person.setAge(10);
 
         personRepository.save(person);
 
-        System.out.println(personRepository.findAll());
 
-        List<Person> people = personRepository.findAll();
+        List<Person> people = personRepository.findByName("john");
 
-        assertThat(people.get(0).getName()).isEqualTo("martin");
+        assertThat(people.size()).isEqualTo(1);
+        assertThat(people.get(0).getName()).isEqualTo("john");
         assertThat(people.get(0).getAge()).isEqualTo(10);
     }
 
