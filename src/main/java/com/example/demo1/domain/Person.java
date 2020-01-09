@@ -3,6 +3,8 @@ package com.example.demo1.domain;
 import com.example.demo1.controller.dto.PersonDto;
 import com.example.demo1.domain.dto.Birthday;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
+@Where(clause = "deleted = false") //deleted = false 인 값만 검색되도록
 public class Person {
 
     @Id
@@ -43,6 +46,9 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+    @ColumnDefault("0")//false를 가리ㅊ키는 것
+    private boolean deleted;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

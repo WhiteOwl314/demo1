@@ -76,12 +76,10 @@ public class PersonService {
 
     @Transactional
     public void delete(Long id){
-//        Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
-//
-//        personRepository.delete(person);
+        Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
 
+        person.setDeleted(true);
 
-        //간단하게
-        personRepository.deleteById(id);
+        personRepository.save(person);
     }
 }

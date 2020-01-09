@@ -87,4 +87,6 @@ class PersonControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    //데이터베이스를 삭제하면 복구 방법이 없음
 }
