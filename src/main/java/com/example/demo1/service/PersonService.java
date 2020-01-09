@@ -51,30 +51,16 @@ public class PersonService {
     public void modify(Long id, PersonDto personDto){
 
         //아이디가 존재하면 personAtDb에 넣어준다.
-        Person personAtDb = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
+        Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
 
         //가져온 데이터의 이름과 수정할 데이터의 이름이 다르면 경고메세지 출력
-        if(!personAtDb.getName().equals(personDto.getName())){
+        if(!person.getName().equals(personDto.getName())){
             throw new RuntimeException("이름이 다릅니다.");
         }
 
-        //가져온 데이터를 넣어준다.
-        personAtDb.setName(personDto.getName());
-        personAtDb.setPhoneNumber(personDto.getPhoneNumber());
-        personAtDb.setJob(personDto.getJob());
-
-            //만약 수정할데이터의 값이 존재하면 수정해준다
-        if(personDto.getBirthday() != null){
-
-            personAtDb.setBirthday(new Birthday(personDto.getBirthday()));
-        }
-        personAtDb.setAddress(personDto.getAddress());
-        personAtDb.setBloodType(personDto.getBloodType());
-        personAtDb.setAge(personDto.getAge());
-        personAtDb.setHobby(personDto.getHobby());
-
+        person.set(personDto);
 
         //저장
-        personRepository.save(personAtDb);
+        personRepository.save(person);
     }
 }
