@@ -30,6 +30,8 @@ public class Person {
     @NotEmpty //String 타입에게
     private String name;
 
+    //매년 모든 사람의 나이 더해주기
+    // birthday와 연동되는 값
     @NonNull
     @Min(1)
     private int age;
