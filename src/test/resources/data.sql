@@ -1,4 +1,4 @@
-INSERT INTO person(`id`, `name`, `age`, `year_of_birthday`, `month_of_birthday`,`day_of_birthday`) VALUES (1,'martin', 10, 1991,8,15);
+INSERT INTO person(`id`, `name`, `age`, `year_of_birthday`, `month_of_birthday`,`day_of_birthday`,`job`) VALUES (1,'martin', 10, 1991,8,15, 'programmer');
 INSERT INTO person(`id`, `name`, `age`, `year_of_birthday`, `month_of_birthday`,`day_of_birthday`) VALUES (2,'david', 9 , 1992,7,21);
 INSERT INTO person(`id`, `name`, `age`, `year_of_birthday`, `month_of_birthday`,`day_of_birthday`) VALUES (3,'dennis', 8 ,1993,10,15);
 INSERT INTO person(`id`, `name`, `age`, `year_of_birthday`, `month_of_birthday`,`day_of_birthday`) VALUES (4,'sophia', 7 , 1994,8,31);

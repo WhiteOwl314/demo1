@@ -58,7 +58,7 @@ class PersonControllerTest {
                 MockMvcRequestBuilders.put("/api/person/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content("{\n" +
-                        "  \"name\": \"martin2\",\n" +
+                        "  \"name\": \"martin\",\n" +
                         "  \"age\": 20, \n" +
                         "  \"bloodType\" : \"A\"\n" +
                         "}"))

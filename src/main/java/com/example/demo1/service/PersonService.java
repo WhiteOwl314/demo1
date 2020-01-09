@@ -1,6 +1,8 @@
 package com.example.demo1.service;
 
+import com.example.demo1.controller.dto.PersonDto;
 import com.example.demo1.domain.Person;
+import com.example.demo1.domain.dto.Birthday;
 import com.example.demo1.repository.BlockRepository;
 import com.example.demo1.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -46,17 +48,24 @@ public class PersonService {
     }
 
     @Transactional
-    public void modify(Long id, Person person){
+    public void modify(Long id, PersonDto personDto){
         Person personAtDb = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
 
-        personAtDb.setName(person.getName());
-        personAtDb.setPhoneNumber(person.getPhoneNumber());
-        personAtDb.setJob(person.getJob());
-        personAtDb.setBirthday(person.getBirthday());
-        personAtDb.setAddress(person.getAddress());
-        personAtDb.setBloodType(person.getBloodType());
-        personAtDb.setAge(person.getAge());
-        personAtDb.setHobby(person.getHobby());
+        if(!personAtDb.getName().equals(personDto.getName())){
+            throw new RuntimeException("이름이 다릅니다.");
+        }
+        personAtDb.setName(personDto.getName());
+        personAtDb.setPhoneNumber(personDto.getPhoneNumber());
+        personAtDb.setJob(personDto.getJob());
+
+        if(personDto.getBirthday() != null){
+
+            personAtDb.setBirthday(new Birthday(personDto.getBirthday()));
+        }
+        personAtDb.setAddress(personDto.getAddress());
+        personAtDb.setBloodType(personDto.getBloodType());
+        personAtDb.setAge(personDto.getAge());
+        personAtDb.setHobby(personDto.getHobby());
 
 
         personRepository.save(personAtDb);

@@ -1,5 +1,6 @@
 package com.example.demo1.controller;
 
+import com.example.demo1.controller.dto.PersonDto;
 import com.example.demo1.domain.Person;
 import com.example.demo1.repository.PersonRepository;
 import com.example.demo1.service.PersonService;
@@ -36,8 +37,8 @@ public class PersonController {
 
     //수정하는 API
     @PutMapping("/{id}")
-    public void modifyPerson(@PathVariable Long id, @RequestBody Person person){
-        personService.modify(id,person);
+    public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto){
+        personService.modify(id,personDto);
         log.info("person -> {}" , personRepository.findAll());
     }
 }
