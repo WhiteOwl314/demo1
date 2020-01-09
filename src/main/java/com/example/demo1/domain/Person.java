@@ -53,11 +53,9 @@ public class Person {
         if(personDto.getAge() != 0){ //int 는 값을 넣어주지 않으면 초기에 0으로 세팅됨
             this.setAge(personDto.getAge());
         }
-
         if(!StringUtils.isEmpty(personDto.getHobby())){
             this.setHobby(personDto.getHobby());
         }
-
         if(!StringUtils.isEmpty(personDto.getBloodType())){
             this.setBloodType(personDto.getBloodType());
         }
@@ -70,6 +68,5 @@ public class Person {
         if(!StringUtils.isEmpty(personDto.getPhoneNumber())){
             this.setPhoneNumber(personDto.getPhoneNumber());
         }
-
     }
 }

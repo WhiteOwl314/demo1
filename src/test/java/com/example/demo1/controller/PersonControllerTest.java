@@ -1,5 +1,6 @@
 package com.example.demo1.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,10 +22,14 @@ class PersonControllerTest {
 
     private MockMvc mockMvc;
 
+    //반복되는 부분 리펙토링
+    @BeforeEach //매 테스트마다 한번씩 실행됨
+    void beforeEach(){
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+    }
+
     @Test
     void getPerson() throws Exception{
-
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/person/1"))
@@ -35,7 +40,6 @@ class PersonControllerTest {
 
     @Test
     void postPerson() throws Exception{
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/person?name=martin2&age=20&bloodType=A")
@@ -52,8 +56,6 @@ class PersonControllerTest {
     @Test
     void modifyPerson() throws Exception{
 
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
-
         mockMvc.perform(
                 MockMvcRequestBuilders.put("/api/person/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -64,5 +66,25 @@ class PersonControllerTest {
                         "}"))
                 .andDo(print())
                 .andExpect(status().isOk()); //put 은 200으로 세팅
+    }
+
+    //이름만 바뀌는 것 테스트
+    @Test
+    void modifyName() throws Exception{
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.patch("/api/person/1")
+                .param("name","martin22"))//네임이 하나여서
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deletePerson() throws Exception{
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/person/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }

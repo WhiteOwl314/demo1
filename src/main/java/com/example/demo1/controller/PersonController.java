@@ -41,4 +41,19 @@ public class PersonController {
         personService.modify(id,personDto);
         log.info("person -> {}" , personRepository.findAll());
     }
+
+    //이름이 정말 바껴야 하는 경우
+    @PatchMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, String name){
+
+        personService.modify(id, name);
+        log.info("person -> {}" , personRepository.findAll());
+    }
+
+    //삭제하는 API
+    @DeleteMapping("/{id}")
+    public void deletePerson(@PathVariable Long id){
+        personService.delete(id);
+        log.info("person -> {}" , personRepository.findAll());
+    }
 }

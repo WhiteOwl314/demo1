@@ -63,4 +63,25 @@ public class PersonService {
         //저장
         personRepository.save(person);
     }
+
+    //modify 이름 바꿔야 하는 경우 오버라이딩
+    @Transactional
+    public void modify(Long id, String name){
+       Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
+
+       person.setName(name);
+
+       personRepository.save(person);
+    }
+
+    @Transactional
+    public void delete(Long id){
+//        Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
+//
+//        personRepository.delete(person);
+
+
+        //간단하게
+        personRepository.deleteById(id);
+    }
 }
