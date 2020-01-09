@@ -31,4 +31,14 @@ class PersonControllerTest {
                 .andExpect(status().isOk());
                 //isOk : 200응답
     }
+
+    @Test
+    void postPerson() throws Exception{
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/person"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }

@@ -16,4 +16,9 @@ public class PersonController {
     public Person getPerson(@PathVariable Long id){
         return personService.getPerson(id);
     }
+
+    @PostMapping
+    public void postPerson(Person person){
+        personService.put(person);
+    }
 }

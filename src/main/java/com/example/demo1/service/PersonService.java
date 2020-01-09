@@ -38,4 +38,10 @@ public class PersonService {
 
         return person;
     }
+
+    //save 하는 메소드
+    @Transactional
+    public void put(Person person){
+        personRepository.save(person);
+    }
 }
