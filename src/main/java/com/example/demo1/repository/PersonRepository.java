@@ -22,7 +22,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByMonthOfBirthday(@Param("monthOfBirthday") int monthOfBirthday );
 
     //삭제표시한 사람 볼 수  있는 방법
-    @Query(value = "SELECT person FROM Person person WHERE person.deleted = true ")
+    @Query(value = "SELECT * FROM Person person WHERE person.deleted = true ", nativeQuery = true)
     List<Person> findPeopleDeleted();
 
 }
