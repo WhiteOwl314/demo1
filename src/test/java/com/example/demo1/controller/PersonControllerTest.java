@@ -1,5 +1,7 @@
 package com.example.demo1.controller;
 
+import com.example.demo1.repository.PersonRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@Slf4j
 class PersonControllerTest {
 
     @Autowired
     PersonController personController;
+    @Autowired
+    private PersonRepository personRepository;
+
 
     private MockMvc mockMvc;
 
@@ -86,6 +92,9 @@ class PersonControllerTest {
                 MockMvcRequestBuilders.delete("/api/person/1"))
                 .andDo(print())
                 .andExpect(status().isOk());
+
+
+        log.info("people deleted : {}", personRepository.findPeopleDeleted());
     }
 
     //데이터베이스를 삭제하면 복구 방법이 없음
