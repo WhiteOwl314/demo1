@@ -37,7 +37,12 @@ class PersonControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/api/person"))
+                MockMvcRequestBuilders.post("/api/person?name=martin2&age=20&bloodType=A"))
+//                    .content("{\n" +
+//                            "  \"name\": \"martin2\",\n" +
+//                            "  \"age\": 20, \n" +
+//                            "  \"bloodType\" : \"A\"\n" +
+//                            "}"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
