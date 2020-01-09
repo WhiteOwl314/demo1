@@ -46,8 +46,8 @@ class PersonControllerTest {
                             "  \"bloodType\" : \"A\"\n" +
                             "}"))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
     //415번 오류 : content 타입이 제대로 되어있지 않다 는 의미
-    //200: 성공했다는 의미 [
+    //200: 성공했다는 의미
 }
