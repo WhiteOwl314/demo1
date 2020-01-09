@@ -35,8 +35,8 @@ public class PersonController {
     }
 
     //수정하는 API
-    @PutMapping
-    public void modifyPerson(Long id, Person person){
+    @PutMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, @RequestBody Person person){
         personService.modify(id,person);
         log.info("person -> {}" , personRepository.findAll());
     }
