@@ -48,6 +48,21 @@ class PersonControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
-    //415번 오류 : content 타입이 제대로 되어있지 않다 는 의미
-    //200: 성공했다는 의미
+
+    @Test
+    void modifyPerson() throws Exception{
+
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.put("/api/person?id=1")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content("{\n" +
+                        "  \"name\": \"martin2\",\n" +
+                        "  \"age\": 20, \n" +
+                        "  \"bloodType\" : \"A\"\n" +
+                        "}"))
+                .andDo(print())
+                .andExpect(status().isOk()); //put 은 200으로 세팅
+    }
 }
