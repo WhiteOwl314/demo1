@@ -1,4 +1,4 @@
-GET http://localhost:8080/api/person?id=1
+GET http://localhost:8080/api/person/1
 
 ###
 GET https://jojoldu.tistory.com/266
