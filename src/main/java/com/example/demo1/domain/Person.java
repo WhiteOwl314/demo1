@@ -48,11 +48,6 @@ public class Person {
     @ColumnDefault("0")//false를 가리ㅊ키는 것
     private boolean deleted;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private Block block;
-    //optional = true : 블록의 값은 항상 필요하다
-
     public void set(PersonDto personDto){
         if(!StringUtils.isEmpty(personDto.getHobby())){
             this.setHobby(personDto.getHobby());
