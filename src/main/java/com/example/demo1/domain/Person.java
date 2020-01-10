@@ -30,12 +30,6 @@ public class Person {
     @NotEmpty //String 타입에게
     private String name;
 
-    //매년 모든 사람의 나이 더해주기
-    // birthday와 연동되는 값
-    @NonNull
-    @Min(1)
-    private int age;
-
     private String hobby;
     private String address;
 
@@ -76,5 +70,15 @@ public class Person {
         if(!StringUtils.isEmpty(personDto.getPhoneNumber())){
             this.setPhoneNumber(personDto.getPhoneNumber());
         }
+    }
+
+    //생일을 통해서 나이 구하기
+    public int getAge(){
+        return LocalDate.now().getYear() - this.birthday.getYearOfBirthday() + 1;
+    }
+
+    //생일인지 아닌지 알려주는 로직
+    public boolean isBirthdayToday(){
+        return LocalDate.now().equals(LocalDate.of(this.birthday.getYearOfBirthday(),this.birthday.getMonthOfBirthday(),this.birthday.getDayOfBirthday()));
     }
 }
