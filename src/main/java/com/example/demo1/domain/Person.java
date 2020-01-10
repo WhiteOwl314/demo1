@@ -52,9 +52,6 @@ public class Person {
     //optional = true : 블록의 값은 항상 필요하다
 
     public void set(PersonDto personDto){
-        if(personDto.getAge() != 0){ //int 는 값을 넣어주지 않으면 초기에 0으로 세팅됨
-            this.setAge(personDto.getAge());
-        }
         if(!StringUtils.isEmpty(personDto.getHobby())){
             this.setHobby(personDto.getHobby());
         }
@@ -73,8 +70,12 @@ public class Person {
     }
 
     //생일을 통해서 나이 구하기
-    public int getAge(){
-        return LocalDate.now().getYear() - this.birthday.getYearOfBirthday() + 1;
+    public Integer getAge(){
+        if(this.birthday != null){
+            return LocalDate.now().getYear() - this.birthday.getYearOfBirthday() + 1;
+        } else {
+            return null;
+        }
     }
 
     //생일인지 아닌지 알려주는 로직

@@ -27,7 +27,6 @@ class PersonRepositoryTest {
         Person person = new Person();
 
         person.setName("john");
-        person.setAge(10);
 
         personRepository.save(person);
 
