@@ -43,7 +43,6 @@ public class Person {
 
     private String job;
 
-    @ToString.Exclude
     private String phoneNumber;
 
     @ColumnDefault("0")//false를 가리ㅊ키는 것
