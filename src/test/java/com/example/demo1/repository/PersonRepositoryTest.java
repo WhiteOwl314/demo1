@@ -23,7 +23,7 @@ class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @Test
-    public void crudee(){
+    public void crud(){
         Person person = new Person();
 
         person.setName("john");

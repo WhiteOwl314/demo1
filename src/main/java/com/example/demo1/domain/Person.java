@@ -30,14 +30,17 @@ public class Person {
     @NotEmpty //String 타입에게
     private String name;
 
+
     private String hobby;
+
     private String address;
 
     @Valid
     @Embedded
     private Birthday birthday;
 
-    private String bloodType;
+    //혈액형은 쓸모 없어서 지움
+
     private String job;
 
     @ToString.Exclude
@@ -54,9 +57,6 @@ public class Person {
     public void set(PersonDto personDto){
         if(!StringUtils.isEmpty(personDto.getHobby())){
             this.setHobby(personDto.getHobby());
-        }
-        if(!StringUtils.isEmpty(personDto.getBloodType())){
-            this.setBloodType(personDto.getBloodType());
         }
         if(!StringUtils.isEmpty(personDto.getAddress())){
             this.setAddress(personDto.getAddress());
