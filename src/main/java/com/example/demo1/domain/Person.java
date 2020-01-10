@@ -61,6 +61,11 @@ public class Person {
         if(!StringUtils.isEmpty(personDto.getPhoneNumber())){
             this.setPhoneNumber(personDto.getPhoneNumber());
         }
+
+        //birthday 복사하는 로직
+        if(personDto.getBirthday() != null){
+            this.setBirthday(Birthday.of(personDto.getBirthday()));
+        }
     }
 
     //생일을 통해서 나이 구하기
