@@ -1,6 +1,9 @@
 package com.example.demo1.controller;
 
+import com.example.demo1.controller.dto.PersonDto;
 import com.example.demo1.repository.PersonRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -13,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +34,9 @@ class PersonControllerTest {
     PersonController personController;
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
 
     private MockMvc mockMvc;
@@ -105,5 +113,19 @@ class PersonControllerTest {
 
         assertTrue(personRepository.findPeopleDeleted().stream().anyMatch(person -> person.getId().equals(1L)));
 
+    }
+
+    @Test
+    void checkJasonString() throws JsonProcessingException{
+        PersonDto dto = new PersonDto();
+        dto.setName("martin");
+        dto.setBirthday(LocalDate.now());
+        dto.setAddress("판교");
+
+        System.out.println(">>>" + toJasonString(dto));
+    }
+
+    private String toJasonString(PersonDto personDto) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(personDto);
     }
 }
