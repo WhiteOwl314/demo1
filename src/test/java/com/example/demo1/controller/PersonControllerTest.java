@@ -72,8 +72,6 @@ class PersonControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content("{\n" +
                         "  \"name\": \"martin\",\n" +
-                        "  \"age\": 20, \n" +
-                        "  \"bloodType\" : \"A\"\n" +
                         "}"))
                 .andDo(print())
                 .andExpect(status().isOk()); //put 은 200으로 세팅
