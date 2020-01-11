@@ -95,14 +95,14 @@ class PersonControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.delete("/api/person/1"))
                 .andDo(print())
-                .andExpect(status().isOk()) //200 인것만 검증하고 있음 , 실제로 지워졌는지 지워지지 않았는지 로직 없음
-                .andExpect(content().string("true"));
+                .andExpect(status().isOk()); //200 인것만 검증하고 있음 , 실제로 지워졌는지 지워지지 않았는지 로직 없음
 
         //검증방법
         //1. 컨트롤러에서 void 리턴하지 않고 정상적인 값 리턴해주도록
-        //2.
+        //2. Controller에서 요청한 사람이 deleted에 체크된 사람이 있는지 true false 로 알려주는 로직
+        //3. PersonControllerTest 에서 직접 personRepository의 삭제된 명단 검토
 
+        assertTrue(personRepository.findPeopleDeleted().stream().anyMatch(person -> person.getId().equals(1L)));
 
-        log.info("people deleted : {}", personRepository.findPeopleDeleted());
     }
 }

@@ -52,10 +52,8 @@ public class PersonController {
 
     //삭제하는 API
     @DeleteMapping("/{id}")
-    public boolean deletePerson(@PathVariable Long id){
+    public void deletePerson(@PathVariable Long id){
         personService.delete(id);
         log.info("person -> {}" , personRepository.findAll());
-
-        return personRepository.findPeopleDeleted().stream().anyMatch(person -> person.getId().equals(id));
     }
 }
