@@ -31,15 +31,12 @@ public class PersonController {
     public void postPerson(@RequestBody Person person){
 
         personService.put(person);
-
-        log.info("person -> {}" , personRepository.findAll());
     }
 
     //수정하는 API
     @PutMapping("/{id}")
     public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto){
         personService.modify(id,personDto);
-        log.info("person -> {}" , personRepository.findAll());
     }
 
     //이름이 정말 바껴야 하는 경우
@@ -47,13 +44,11 @@ public class PersonController {
     public void modifyPerson(@PathVariable Long id, String name){
 
         personService.modify(id, name);
-        log.info("person -> {}" , personRepository.findAll());
     }
 
     //삭제하는 API
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable Long id){
         personService.delete(id);
-        log.info("person -> {}" , personRepository.findAll());
     }
 }
