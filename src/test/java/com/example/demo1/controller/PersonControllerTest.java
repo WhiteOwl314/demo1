@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -38,6 +39,8 @@ class PersonControllerTest {
     private PersonRepository personRepository;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private MappingJackson2HttpMessageConverter messageConverter;
 
 
 
@@ -46,7 +49,7 @@ class PersonControllerTest {
     //반복되는 부분 리펙토링
     @BeforeEach //매 테스트마다 한번씩 실행됨
     void beforeEach(){
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).setMessageConverters(messageConverter).build();
     }
 
     @Test
