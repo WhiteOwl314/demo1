@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -94,11 +95,14 @@ class PersonControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.delete("/api/person/1"))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()) //200 인것만 검증하고 있음 , 실제로 지워졌는지 지워지지 않았는지 로직 없음
+                .andExpect(content().string("true"));
+
+        //검증방법
+        //1. 컨트롤러에서 void 리턴하지 않고 정상적인 값 리턴해주도록
+        //2.
 
 
         log.info("people deleted : {}", personRepository.findPeopleDeleted());
     }
-
-    //데이터베이스를 삭제하면 복구 방법이 없음
 }
