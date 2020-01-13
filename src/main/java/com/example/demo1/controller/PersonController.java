@@ -28,9 +28,11 @@ public class PersonController {
     //저장하는 API
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //201: created
-    public void postPerson(@RequestBody Person person){
-
-        personService.put(person);
+    public void postPerson(@RequestBody PersonDto personDto){
+        //Post 방법에서 RequestBody로 받는것은 그리 안전한 방법이 아님.
+        //이유: Person Entity 에서 id,deleted 는 사용자가 입력하는게 아니기 때문
+        //Entity를 직접 쓰지 않고 객체를 받아서 Entity로 변환이 가장 많음
+        personService.put(personDto);
     }
 
     //수정하는 API

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
@@ -77,16 +78,25 @@ class PersonControllerTest {
     @Test
     void postPerson() throws Exception{
 
+        PersonDto dto = PersonDto.of("martin","programming","대전",LocalDate.now(),"programmer","010-3925-1533");
+
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/person?name=martin2&age=20&bloodType=A")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .content("{\n" +
-                            "  \"name\": \"martin2\",\n" +
-                            "  \"age\": 20, \n" +
-                            "  \"bloodType\" : \"A\"\n" +
-                            "}"))
+                    .content(toJasonString(dto)))
                 .andDo(print())
                 .andExpect(status().isCreated());
+
+        Person result = personRepository.findAll(Sort.by(Sort.Direction.DESC,"id")).get(0);
+
+        assertAll(
+                () -> assertThat(result.getName()).isEqualTo("martin"),
+                () -> assertThat(result.getHobby()).isEqualTo("programming"),
+                () -> assertThat(result.getAddress()).isEqualTo("대전"),
+                () -> assertThat(result.getBirthday()).isEqualTo(Birthday.of(LocalDate.now())),
+                () -> assertThat(result.getJob()).isEqualTo("programmer"),
+                () -> assertThat(result.getPhoneNumber()).isEqualTo("010-3925-1533")
+        );
     }
 
     @Test
