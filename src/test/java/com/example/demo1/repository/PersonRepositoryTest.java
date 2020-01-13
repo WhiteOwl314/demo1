@@ -23,29 +23,41 @@ class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @Test
-    public void crud(){
-        Person person = new Person();
+    void findByName(){
 
-        person.setName("john");
+        List<Person> people = personRepository.findByName("tony");
+        assertThat(people.size()).isEqualTo(1);
 
-        personRepository.save(person);
-
-
-        List<Person> result = personRepository.findByName("john");
-
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0).getName()).isEqualTo("john");
-//        assertThat(result.get(0).getAge()).isEqualTo(10);
+        assertAll(
+                () -> assertThat(people.get(0).getName()).isEqualTo("tony"),
+                () -> assertThat(people.get(0).getBirthday()).isEqualTo(Birthday.of(LocalDate.of(1991,7,10))),
+                () -> assertThat(people.get(0).getPhoneNumber()).isEqualTo("010-3925-1533"),
+                () -> assertThat(people.get(0).getAddress()).isEqualTo("대전"),
+                () -> assertThat(people.get(0).getJob()).isEqualTo("officer"),
+                () -> assertThat(people.get(0).getHobby()).isEqualTo("reading")
+        );
     }
 
     @Test
-    void findByBirthdayBetween(){
+    void findByMonthOfBirthday(){
 
-        List<Person> result = personRepository.findByMonthOfBirthday(8);
+        List<Person> people = personRepository.findByMonthOfBirthday(7);
 
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getName()).isEqualTo("martin");
-        assertThat(result.get(1).getName()).isEqualTo("sophia");
+        assertThat(people.size()).isEqualTo(2);
+
+        assertAll(
+                () -> assertThat(people.get(0).getName()).isEqualTo("david"),
+                () -> assertThat(people.get(1).getName()).isEqualTo("tony")
+        );
     }
 
+    @Test
+    void findPeopleDeleted(){
+
+        List<Person> people = personRepository.findPeopleDeleted();
+
+        assertThat(people.size()).isEqualTo(1);
+
+        assertThat(people.get(0).getName()).isEqualTo("andrew");
+    }
 }
