@@ -2,6 +2,8 @@ package com.example.demo1.service;
 
 import com.example.demo1.controller.dto.PersonDto;
 import com.example.demo1.domain.Person;
+import com.example.demo1.exception.PersonNotFoundException;
+import com.example.demo1.exception.RenameNotPermittedException;
 import com.example.demo1.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +40,11 @@ public class PersonService {
     public void modify(Long id, PersonDto personDto){
 
         //아이디가 존재하면 personAtDb에 넣어준다.
-        Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
+        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException());
 
         //가져온 데이터의 이름과 수정할 데이터의 이름이 다르면 경고메세지 출력
         if(!person.getName().equals(personDto.getName())){
-            throw new RuntimeException("이름이 다릅니다.");
+            throw new RenameNotPermittedException();
         }
 
         person.set(personDto);
@@ -54,7 +56,7 @@ public class PersonService {
     //modify 이름 바꿔야 하는 경우 오버라이딩
     @Transactional
     public void modify(Long id, String name){
-       Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
+       Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException());
 
        person.setName(name);
 
@@ -63,7 +65,7 @@ public class PersonService {
 
     @Transactional
     public void delete(Long id){
-        Person person = personRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디가 존재하지 않습니다."));
+        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException());
 
         person.setDeleted(true);
 
