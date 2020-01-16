@@ -37,15 +37,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PersonControllerTest {
 
     @Autowired
-    PersonController personController;
-    @Autowired
     private PersonRepository personRepository;
     @Autowired
     private ObjectMapper objectMapper;
+    //한번에 적용되도록
     @Autowired
-    private MappingJackson2HttpMessageConverter messageConverter;
-    @Autowired
-    private GloberExceptionHandler globerExceptionHandler;
+    private WebApplicationContext wac;
+
 
 
     private MockMvc mockMvc;
@@ -54,9 +52,7 @@ class PersonControllerTest {
     @BeforeEach //매 테스트마다 한번씩 실행됨
     void beforeEach(){
         mockMvc = MockMvcBuilders
-                .standaloneSetup(personController)
-                .setMessageConverters(messageConverter)
-                .setControllerAdvice(globerExceptionHandler) //GloberExceptionHandler가 메인 코드에는 적용이 되었는데 테스트에는 적용이 안되서 추가
+                .webAppContextSetup(wac)
                 .alwaysDo(print())
                 .build();
     }
