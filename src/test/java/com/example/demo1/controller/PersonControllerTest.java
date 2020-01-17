@@ -27,6 +27,7 @@ import org.springframework.web.util.NestedServletException;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -55,6 +56,21 @@ class PersonControllerTest {
                 .webAppContextSetup(wac)
                 .alwaysDo(print())
                 .build();
+    }
+
+    @Test
+    void getAll() throws Exception{
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/api/person"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(hasSize(6)))
+                .andExpect(jsonPath("$.[0].name").value("martin"))
+                .andExpect(jsonPath("$.[1].name").value("david"))
+                .andExpect(jsonPath("$.[2].name").value("dennis"))
+                .andExpect(jsonPath("$.[3].name").value("sophia"))
+                .andExpect(jsonPath("$.[4].name").value("benny"))
+                .andExpect(jsonPath("$.[5].name").value("tony"));
+
     }
 
     @Test

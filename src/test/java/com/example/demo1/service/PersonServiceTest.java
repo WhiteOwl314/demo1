@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,18 @@ class PersonServiceTest {
     private PersonService personService;
     @Mock //대상에서 Autowired 하고 있는 것, data.sql 사용하지 않음 -> 어떻게 동작할지는 이 안에서 지정
     private PersonRepository personRepository;
+
+    @Test
+    void getAll(){
+        when(personRepository.findAll()).thenReturn(Lists.newArrayList(new Person("martin"),new Person("denis"),new Person("tony")));
+
+        List<Person> result = personService.getAll();
+
+        assertThat(result.size()).isEqualTo(3);
+        assertThat(result.get(0).getName()).isEqualTo("martin");
+        assertThat(result.get(1).getName()).isEqualTo("denis");
+        assertThat(result.get(2).getName()).isEqualTo("tony");
+    }
 
     @Test
     void getPeopleByName(){

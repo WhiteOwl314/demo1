@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.xml.ws.Response;
+import java.util.List;
 
 @RequestMapping(value = "/api/person")
 @RestController
@@ -23,6 +24,11 @@ public class PersonController {
 
     @Autowired
     private PersonService personService; //PersonService bean injection
+
+    @GetMapping
+    public List<Person> getAll(){
+        return personService.getAll();
+    }
 
     //조회하는 API
     @GetMapping("/{id}")
