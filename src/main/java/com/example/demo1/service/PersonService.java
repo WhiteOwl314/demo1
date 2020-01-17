@@ -7,6 +7,8 @@ import com.example.demo1.exception.RenameNotPermittedException;
 import com.example.demo1.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,10 @@ public class PersonService {
 
     public List<Person> getPeopleByName(String name) {
         return personRepository.findByName(name);
+    }
+
+    public Page<Person> getAll(Pageable pageable) {
+        return personRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
@@ -52,8 +58,8 @@ public class PersonService {
         //저장
         personRepository.save(person);
     }
-
     //modify 이름 바꿔야 하는 경우 오버라이딩
+
     @Transactional
     public void modify(Long id, String name){
        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException());
@@ -70,9 +76,5 @@ public class PersonService {
         person.setDeleted(true);
 
         personRepository.save(person);
-    }
-
-    public List<Person> getAll() {
-        return personRepository.findAll();
     }
 }
